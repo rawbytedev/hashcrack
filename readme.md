@@ -1,4 +1,4 @@
-# Multi Force
+# Hash-Crack
 
 This project is a non-object oriented open source, Software for Windows/Linux made in Python 3 
 
@@ -10,7 +10,7 @@ You will need:
 * A Windows/Linux Computer
 * Can be run on terminal emulator such as termux...
 
-1. Download the repository via github or git eg. `git clone https://github.com/XnetwolfX/MultiForce`
+1. Download the repository via github or git eg. `git clone https://github.com/XnetwolfX/Hashcrack`
 2. install the required modules by running `python -m pip install -r requirements.txt`
 
 ## Features
@@ -43,12 +43,15 @@ If you find any error, feel free to let me know
 
 ## Contributing
 
+Monero:
+`4AjmBwYjyBvCthXeUUvymdfnaZyjJG6spTHetqgziEasc5N5LB6HkZ2aGBTYfHTp9X1SqugDxib5dM24dJg8A2eHURpxyRu`
+Bitcoin:
+`bc1q4u6kxwcuzcnc0ggatzxvpskan9kul548mzq3e5`
 
 ## About
 
 Project Created by Rad Taren
-am owning many nicknames(Netwolf, Radiationbolt)
-My old repo:
+My repo:
 	https://github.com/XnetwolfX
 
 ## Disclaimer
