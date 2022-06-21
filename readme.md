@@ -1,4 +1,4 @@
-# Hash-Crack
+# HashWolf
 
 This project is a non-object oriented open source, Software for Windows/Linux made in Python 3 
 
@@ -49,7 +49,7 @@ Bitcoin: `12iuxEDyQtGY2QgD3sHp3KrV363rcsBcMi`
 
 Project Created by Rad Taren
 My repo:
-	https://github.com/XnetwolfX
+	https://github.com/Xnetwolf
 
 ## Disclaimer
 
