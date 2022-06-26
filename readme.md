@@ -24,8 +24,7 @@ You will need:
 * Atleast 800 mb ram free if you intend to use indirect mode
 
 1. Download the repository via github or git eg. `git clone https://github.com/Xnetwolf/hashwolf`
-2. install the required modules by running `python -m pip install -r requirements.txt`
-No need to install any requirements this project uses pre install modules
+2. No need to install any requirements this project uses pre install modules
 
 ## Features
 
