@@ -9,12 +9,12 @@ def banner():
 	print("HashWolf")
 	
 	
-def entry_point():
+def entry_point(ar):
 	banner()
-	scan_input()
+	scan_input(ar)
 	
 #def crack()
-def scan_input():
+def scan_input(ar):
     	
 	if ar.attack == "direct":
 		print("direct")
@@ -31,22 +31,29 @@ def scan_input():
 #Try again later, If the problem isn't solved, make an issue on github with you're log files """)
 #		else:
 #			print("## Wordlist verified")
+	
 	elif ar.attack == "rainbow":
 		re = open("logs/rainlogs.txt", "r")
 		if ar.type in re:
 			print("## Rainbow dictionnary verified")
 		else:
 			print("error, Generate a dictionnary before starting")
+	
 			
 	print("Attack starting ")
 	print(f"""
+	Note: None == Default
 Mode: {ar.attack}
 Hash_Type: {ar.type}
 Wordlist: {ar.wordlist}
 hash_to_crack: {ar.hashed}
+char to use: {ar.character}
+output file: {ar.output}
+
 """)
 ##use hashwolf to start attack
-	hashwolf.start(ar.attack, ar.hashed, ar.wordlist, ar.type)
+## hashwolf launcher
+	hashwolf.start(ar.attack, ar.hashed, ar.wordlist, ar.type, ar.character, ar.output)
 
 
 
@@ -74,7 +81,12 @@ p.add_argument('-word', '--wordlist', help="This is the wordlist path provided b
 
 p.add_argument('-hash', '--hashed', help="The hash you want to crack")
 
-global ar
+p.add_argument('-out', '--output', help="path to the file where cracking result will be saved, if not specified nothing will be saved to anyfile")
+
+p.add_argument('-char', '--character', help="character that will be used to generate wordlist for indirect or for dictionnary mode, if not defined delfaut will be used")
+
+
+
 ar = p.parse_args()
-entry_point()
+entry_point(ar)
 	
