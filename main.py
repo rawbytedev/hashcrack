@@ -19,18 +19,18 @@ def scan_input(ar):
 	if ar.attack == "direct":
 		print("direct")
 		## uncomment
-		#try:
-#			open(ar.wordlist, "r")
-#		except:
-#			print("""[#] An error occured while trying to use wordlist
-#The cause of the error are listed:
-#- File doesn't exist
-#- Hashwolf doesn't have permission to read file
-#- Wrong path
+		try:
+			open(ar.wordlist, "r")
+		except:
+			print("""[#] An error occured while trying to use wordlist
+The cause of the error are listed:
+- File doesn't exist
+- Hashwolf doesn't have permission to read file
+- Wrong path
 
-#Try again later, If the problem isn't solved, make an issue on github with you're log files """)
-#		else:
-#			print("## Wordlist verified")
+Try again later, If the problem isn't solved, make an issue on github with you're log files """)
+		else:
+			print("## Wordlist verified")
 	
 	elif ar.attack == "rainbow":
 		re = open("logs/rainlogs.txt", "r")
@@ -38,7 +38,6 @@ def scan_input(ar):
 			print("## Rainbow dictionnary verified")
 		else:
 			print("error, Generate a dictionnary before starting")
-	
 			
 	print("Attack starting ")
 	print(f"""
@@ -53,9 +52,8 @@ output file: {ar.output}
 """)
 ##use hashwolf to start attack
 ## hashwolf launcher
-	hashwolf.start(ar.attack, ar.hashed, ar.wordlist, ar.type, ar.character, ar.output)
-
-
+		
+	hashwolf.start(ar.attack, ar.hashed, ar.type, ar.wordlist, ar.character, ar.output)
 
 #parse, parse, argument
 ## add more later	

@@ -43,11 +43,11 @@ Currently this program crack those hash:
 
 1. use the following command:
 `python main.py -h` and follow the instructions on screen to start you're cracking 
-2. Don't forget the `b` meant for binary in python(b'{hash}')
+2. Don't forget to inclose the hash to crack between quotes `' '`('{hash}')
 
 example of usage:
-`python main.py -a indirect -t md5 -out cracked.txt -hash b'I\xf6\x8a\\\x84\x93\xec,\x0b\xf4\x89\x82\x1c!\xfc;' ` 
-you notice the b and quote(b' hash ')
+`python main.py -a indirect -t md5 -out cracked.txt -hash 'I\xf6\x8a\\\x84\x93\xec,\x0b\xf4\x89\x82\x1c!\xfc;' ` 
+you notice the absence of b and presence of quote(' hash ')
 
 ## Help
 

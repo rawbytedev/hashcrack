@@ -56,7 +56,7 @@ def direct(hash_type, wordlist, hash_to_crack, output_file=None):
 		#generate hash just give hashtype + word
 				r = generatehash(hash_type, t[b])
 		#convert byte to str without changing the byte
-				l = f"{hash_to_crack}"
+				l = f"b'{hash_to_crack}'"
 				s= r.split("\n")
 				if l == s[0]:
 					out = t[b]
@@ -74,7 +74,7 @@ def compare(hash_type, newPrefix, bytehash, output_file=None):
 	strhash = generatehash(hash_type, newPrefix)
 	strhash1 = strhash.split("\n")
 	strhash2 = strhash1[0]
-	if strhash2 == f"{bytehash}":
+	if strhash2 == f"b'{bytehash}'":
 		#dt = time.time() #speed test
 		#print(f"took: {dt-t} second") #speed test
 		#print(f"{dt-tim}")
@@ -83,8 +83,6 @@ def compare(hash_type, newPrefix, bytehash, output_file=None):
 	else:
 		print(f"cracking attempt: {h+1}")
 		
-	
-
 def printAllKLengthRec(set, prefix, n, k, hash_type, hash_to_crack, output_file=None):
     #global tim
     #tim = time.time()
@@ -99,7 +97,7 @@ def printAllKLengthRec(set, prefix, n, k, hash_type, hash_to_crack, output_file=
         
         printAllKLengthRec(set, newPrefix, n, k - 1, hash_type, hash_to_crack)
         
-def indirect(hash_type, hash_to_crack, char_to_use="qwertzuiopasdfghjklyxcvbnm+×÷=%/\$€£@*!#:;&_()-'\",.?￦¥°¿¡^[]<>~`§μ¬Г´·{}©|¤₹៛₪", output_file=None, lenght=16):
+def indirect(hash_type, hash_to_crack, char_to_use="qwertzuiopasdfghjklyxcvbnmQWERTZUIOPASDFGHJKLYXCVBNM+×÷=%/\\$€£@*!#:;&_()-'\",.?°¿¡^[]<>~`§μ¬Г´·{}©|¤₹៛₪θฯ1234567890Ω", output_file=None, lenght=2):
 	n = 0
 	#global b
 	#b = 0
@@ -111,7 +109,7 @@ def indirect(hash_type, hash_to_crack, char_to_use="qwertzuiopasdfghjklyxcvbnm+�
 			#print(f"cracking attempt: {b+1}")
 			#b = b+1
 	except:
-				print("Error please report the error on github with all details")
+				print("Error please report the error on github with all details 1")
 			
 def analyse(hash_type):
 	try:
@@ -154,11 +152,11 @@ def generate(set, prefix, n, k, hash_type):
         
         generate(set, newPrefix, n, k - 1)
 ## entry point
-def start(mode, hash_type, wordlist, hash_to_crack, char_to_use, output_file):
+def start(mode, hash_to_crack, hash_type, wordlist=None, char_to_use="qwertzuiopasdfghjklyxcvbnmQWERTZUIOPASDFGHJKLYXCVBNM+×÷=%/\\$€£@*!#:;&_()-'\",.?°¿¡^[]<>~`§μ¬Г´·{}©|¤₹៛₪θฯ1234567890Ω", output_file=None):
 	if mode == "direct":
 		direct(hash_type, wordlist, hash_to_crack, output_file)
 	elif mode == "indirect":
-		indirect(hash_type, hash_to_crack, char_to_use, output_file)
+		indirect(hash_type, hash_to_crack, char_to_use)
 	elif mode == "dictionnary":
 		print("Unavailable under development")
 		#dictionnary(hash_type)
@@ -167,7 +165,8 @@ def start(mode, hash_type, wordlist, hash_to_crack, char_to_use, output_file):
 		#rainbow(hash_type, hash_to_crack, output_file)
 	else:
 		print("[#] An error occured please create an issue at github.com/Xnetwolf/hashwolf to be helped")
+ 
 
-
-#direct("md5","txt.txt",  b'I\xf6\x8a\\\x84\x93\xec,\x0b\xf4\x89\x82\x1c!\xfc;', "heloo.txt")
+	#start("indirect", b'I\xf6\x8a\\\x84\x93\xec,\x0b\xf4\x89\x82\x1c!\xfc;' , "md5")
+#indirect("md5",  b'I\xf6\x8a\\\x84\x93\xec,\x0b\xf4\x89\x82\x1c!\xfc;', "hi")
 #print(generatehash("md5", "hi"))
