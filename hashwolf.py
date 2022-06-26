@@ -103,13 +103,13 @@ def indirect(hash_type, hash_to_crack, char_to_use="qwertzuiopasdfghjklyxcvbnmQW
 	#b = 0
 #	global t
 #	t = time.time() #speed test;
-	try:
-		while n == 0:
-			printAllKLengthRec(list(char_to_use), "", len(char_to_use), lenght, hash_type, hash_to_crack, output_file)
+	#try:
+	while n == 0:
+		printAllKLengthRec(list(char_to_use), "", len(char_to_use), lenght, hash_type, hash_to_crack, output_file)
 			#print(f"cracking attempt: {b+1}")
 			#b = b+1
-	except:
-				print("Error please report the error on github with all details 1")
+	#except:
+				#print("Error please report the error on github with all details 1")
 			
 def analyse(hash_type):
 	try:

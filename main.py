@@ -52,8 +52,10 @@ output file: {ar.output}
 """)
 ##use hashwolf to start attack
 ## hashwolf launcher
-		
-	hashwolf.start(ar.attack, ar.hashed, ar.type, ar.wordlist, ar.character, ar.output)
+	if ar.character == None:
+		hashwolf.start(ar.attack, ar.hashed, ar.type, ar.wordlist, output_file=ar.output)
+	else:
+		hashwolf.start(ar.attack, ar.hashed, ar.type, ar.wordlist, ar.character, ar.output)
 
 #parse, parse, argument
 ## add more later	
