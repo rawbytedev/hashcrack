@@ -1,87 +1,86 @@
 # HashWolf
 
-This project is a object oriented open source, Software for Windows/Linux made in Python 3 
-Hashwolf is an hashcracker design to be user friendly, easy to use, fast and lightweight, it currently have 2/4(direct and indirect) of it available modes(direct, indirect, dictionnary, rainbow)
-the other modes will be finished in a week or two after this version publish
-This project is lightweight and can be used to crack hash in environment with low storage space but high ram or medium
-Hashwolf(library) can be used in other program as it works independly from hashwolf(launcher or main), hashwolf(main) only provide the input needed for hashwolf(library) to work
-that's how it is represented:
-	`hashwolf.start(mode, hash_type, wordlist, hash_to_crack, char_to_use, output_file)`some input can be left undefined(None) those are char_to_use, output_file, wordlist(for indirect but must be defined for direct mode)
-
-## direct mode
-Direct mode of hashwolf is a mode in which hashwolf uses a wordlist provided by user to crack an hash (in ROM)
-## indirect mode
-indirect mode uses high amount of free ram, it generate a word in ram, hash it then compare instead of generating whole list in memory, which eventually will freeze the device
-It tries to use minimal ram
-
-## Installation
-
-You will need:
-
-* [Python 3.6+](https://www.python.org/downloads) (Make sure to add python to PATH during installation)
-* A Windows/Linux Computer
-* Can be run on terminal emulator such as termux...
-* Atleast 800 mb ram free if you intend to use indirect mode
-
-1. Download the repository via github or git eg. `git clone https://github.com/Xnetwolf/hashwolf`
-2. No need to install any requirements this project uses pre install modules
+HashWolf is a versatile and powerful hash cracking tool designed for various attack modes, including direct, indirect, dictionary, and rainbow table attacks. Developed by rawbytedev, HashWolf leverages threading to achieve high performance and supports multiple hash types for a wide range of use cases.
 
 ## Features
 
-Currently this program crack those hash:
+- **Direct Attack**: Uses a user-provided wordlist to crack the hash efficiently.
+- **Indirect Attack**: Generates potential passwords without a wordlist, using threading and optimized techniques.
+- **Dictionary Generation**: Generates all possible combinations of given characters up to a specified length and stores the hash values in files.
+- **Rainbow Table Attack**: Uses pre-generated dictionaries to crack hashes efficiently.
+- **Logging**: Detailed logging of operations and errors for easy debugging and monitoring.
+- **Cross-Platform Compatibility**: Works on both Unix-like systems and Windows.
 
-* md5
-* sha1
-* sha224
-* sha256
-* sha384
-* sha512
-* blake2b
-* blake2s
+## Installation
 
-## Quick Usage
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/rawbytedev/hashwolf.git
+   cd hashwolf
+   ```
 
-1. use the following command:
-`python main.py -h` and follow the instructions on screen to start you're cracking 
-2. Don't forget to inclose the hash to crack between quotes `' '`('{hash}')
+2. **Install Dependencies**:
+   Ensure you have Python installed. If not, download and install Python from [python.org](https://www.python.org/).
 
-example of usage:
-`python main.py -a indirect -t md5 -out cracked.txt -hash 'I\xf6\x8a\\\x84\x93\xec,\x0b\xf4\x89\x82\x1c!\xfc;' ` 
-you notice the absence of b and presence of quote(' hash ')
+## Usage
 
-## Help
+### Command-Line Interface
 
-If you need any help at all, feel free to open a "help" issue.
+HashWolf provides a command-line interface for ease of use. Below are the available options and their descriptions:
 
-## Error / Bugs
+```sh
+usage: main.py [-h] -a ATTACK -t TYPE [-w WORDLIST] [--hash HASHED] [-o OUTPUT] [-c CHARACTER]
 
-If you find any error, feel free to let me know
+options:
+  -h, --help            show this help message and exit
+  -a, --attack ATTACK   Choose from 4 modes: direct, indirect, rainbows, rainbow.
+  -t, --type TYPE       Specify the hash type to crack (e.g., md5, sha256).
+  -w, --wordlist WORDLIST
+                        Path to the wordlist for direct cracking mode.
+  --hash HASHED         The hash you want to crack.
+  -o, --output OUTPUT   Path to the file where cracking results will be saved.
+  -c, --character CHARACTER
+                        Characters to generate wordlist for indirect or dictionary mode.
+```
 
-## Contribute to this project
-buy me a cup of coffee
+### Example Usage
 
-Bitcoin: `12iuxEDyQtGY2QgD3sHp3KrV363rcsBcMi`
-Dogecoin: `DPDuizKPUe8LodMGR9S8S388aKqnTbjWto`
-Litecoin: `LZqvfZYXdJr3D7nHQWi9KxW5hL6DaThbnE`
-BNB: `0x07A88F71AD5f95F592FFfd3D58306bED55706667`
-Polygon: `0x07A88F71AD5f95F592FFfd3D58306bED55706667`
-ETH: `0x07A88F71AD5f95F592FFfd3D58306bED55706667`
-DGB: `dgb1qvhuw7tddr7hat93365tkj4ee9v8yzd9ghjpe2w`
-TRX: `TTLvFFxpDyvvB7rvjVpYDQjeMzRqvwssXo`
+#### Direct Attack
 
+```sh
+python main.py -a direct -t md5 -w /path/to/wordlist.txt --hash d41d8cd98f00b204e9800998ecf8427e -o results.txt
+```
 
+#### Indirect Attack
 
-## About
+```sh
+python main.py -a indirect -t sha256 --hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 -c "abcdef123"
+```
 
-Project Created by Rad Taren
-My repo:
-	https://github.com/Xnetwolf
+#### Dictionary Generation
 
-## Disclaimer
+```sh
+python main.py -a dictionary -t sha1 -c "abc123"
+```
 
-This program is for educational purposes only! I take no responsibility or liability for own personal use.
+#### Rainbow Table Attack
 
-## Licence 
-copyright (c) Rad Taren. All rights reserved.
+```sh
+python main.py -a rainbow -t md5 --hash d41d8cd98f00b204e9800998ecf8427e -o results.txt
+```
 
-[license] under MIT(./license)
+## Logging
+
+HashWolf logs all operations and errors in `hashwolf.log`. This log file provides detailed information about the execution flow and helps in debugging issues.
+
+## Contributions
+
+Contributions are welcome! If you have suggestions, bug reports, or improvements, feel free to create an issue or submit a pull request on GitHub.
+
+## License
+
+HashWolf is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+## Contact
+
+For any questions or support, please create an issue on GitHub
