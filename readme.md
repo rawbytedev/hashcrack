@@ -1,6 +1,6 @@
-# HashWolf
+# HashCrack
 
-HashWolf is a versatile and powerful hash cracking tool designed for various attack modes, including direct, indirect, dictionary, and rainbow table attacks. Developed by rawbytedev, HashWolf leverages threading to achieve high performance and supports multiple hash types for a wide range of use cases.
+HashCrack is a versatile and powerful hash cracking tool designed for various attack modes, including direct, indirect, dictionary, and rainbow table attacks. Developed by rawbytedev, HashCrack leverages threading to achieve high performance and supports multiple hash types for a wide range of use cases.
 
 ## Features
 
@@ -15,7 +15,7 @@ HashWolf is a versatile and powerful hash cracking tool designed for various att
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/rawbytedev/hashwolf.git
+   git clone https://github.com/rawbytedev/hashcrack.git
    cd hashwolf
    ```
 
