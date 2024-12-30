@@ -4,74 +4,69 @@ import hashwolf
 import logging
 
 # Logging configuration
-logging.basicConfig(filename='hashwolf.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='hashcrack.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def banner():
-    print("HashCrack")
+def entry_point(arguments):
+    validate_input(arguments)
 
-def entry_point(ar):
-    banner()
-    scan_input(ar)
-
-def scan_input(ar):
-    if ar.attack == "direct":
-        print("direct")
+def validate_input(arguments):
+    if arguments.attack == "direct":
+        print("Attempting direct attack mode...")
         try:
-            open(ar.wordlist, "r")
+            open(arguments.wordlist, "r")
         except FileNotFoundError:
-            print("""[#] An error occured while trying to use wordlist
-The causes of the error are listed:
-- File doesn't exist
-- Hashwolf doesn't have permission to read file
-- Wrong path
+            print("""Error: Unable to use the specified wordlist.
+Possible reasons:
+- The file does not exist.
+- Insufficient permissions to read the file.
+- Incorrect file path provided.
 
-Try again later. If the problem isn't solved, make an issue on GitHub with your log files""")
+Please check the wordlist file and try again. If the issue persists, report it on GitHub with your log files.""")
         else:
-            print("## Wordlist verified")
+            print("## Wordlist verified successfully")
 
-    elif ar.attack == "rainbow":
+    elif arguments.attack == "rainbow":
         try:
-            with open("logs/rainlogs.txt", "r") as re:
-                if ar.type in re.read():
-                    print("## Rainbow dictionary verified")
+            with open("logs/hash_logs.txt", "r") as log_file:
+                if arguments.type in log_file.read():
+                    print("## Rainbow dictionary verified successfully")
                 else:
-                    print("Error: Generate a dictionary before starting")
+                    print("Error: Dictionary for the specified hash type not found. Generate the dictionary before starting the attack.")
         except FileNotFoundError:
-            print("Error: Rainlogs not found. Generate a dictionary first.")
+            print("Error: Hash logs not found. Generate a dictionary first before attempting rainbow cracking.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
-    print("Attack starting ")
+    print("Starting attack...")
     print(f"""
-    Note: None == Default
-Mode: {ar.attack}
-Hash_Type: {ar.type}
-Wordlist: {ar.wordlist}
-Hash to crack: {ar.hashed}
-Characters to use: {ar.character}
-Output file: {ar.output}
+Note: None == Default
+Mode: {arguments.attack}
+Hash Type: {arguments.type}
+Wordlist: {arguments.wordlist}
+Hash to crack: {arguments.hashed}
+Characters to use: {arguments.character}
+Output file: {arguments.output}
 """)
 
     # Use hashwolf to start attack
-    if ar.character is None:
-        hashwolf.start(ar.attack, ar.hashed, ar.type, ar.wordlist, output_file=ar.output)
+    if arguments.character is None:
+        hashwolf.start(arguments.attack, arguments.hashed, arguments.type, arguments.wordlist, output_file=arguments.output)
     else:
-        hashwolf.start(ar.attack, ar.hashed, ar.type, ar.wordlist, ar.character, ar.output)
+        hashwolf.start(arguments.attack, arguments.hashed, arguments.type, arguments.wordlist, arguments.character, arguments.output)
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser()
-    p.add_argument('-a', '--attack', required=True, help="""You have 4 modes: direct, indirect, rainbows, rainbow
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-a', '--attack', required=True, help="""Select attack mode: direct, indirect, rainbow, or rainbow table.
 
-* direct cracking uses a wordlist provided by user, hashwolf uses threading to be fast.
+* direct: Uses a wordlist provided by the user for cracking.
+* indirect: Generates and hashes words without a wordlist.
+* dictionary: Generates hash dictionaries for future use.
+* rainbow table: Uses pre-generated dictionaries for efficient cracking.""")
+    parser.add_argument('-t', '--type', required=True, help="Specify the hash type to crack (e.g., md5, sha256).")
+    parser.add_argument('-w', '--wordlist', help="Path to the wordlist for direct cracking mode.")
+    parser.add_argument('-hash', '--hashed', help="The hash value you want to crack.")
+    parser.add_argument('-o', '--output', help="Path to the file where cracking results will be saved.")
+    parser.add_argument('-c', '--character', help="Characters to generate wordlist for indirect or dictionary mode; default will be used if not specified.")
 
-* indirect cracks without wordlist, uses threading and efficient techniques to generate and hash words.
-
-* rainbows generates hash dictionaries for later use, storing them in a predefined location.
-
-* rainbow cracking uses pre-generated dictionaries for fast and effective cracking by avoiding unnecessary searching.""")
-    p.add_argument('-t', '--type', help="Specify the hash type to crack (e.g., -hash md5, -hash sha256)", required=True)
-    p.add_argument('-w', '--wordlist', help="Path to the wordlist for direct cracking mode")
-    p.add_argument('-hash', '--hashed', help="The hash you want to crack")
-    p.add_argument('-o', '--output', help="Path to the file where cracking results will be saved")
-    p.add_argument('-c', '--character', help="Characters to generate wordlist for indirect or dictionary mode; default will be used if not specified")
-
-    ar = p.parse_args()
-    entry_point(ar)
+    arguments = parser.parse_args()
+    entry_point(arguments)
