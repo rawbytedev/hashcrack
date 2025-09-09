@@ -5,7 +5,7 @@ import os
 from io import StringIO
 import logging
 
-# Assuming your script is named hashcrack.py and it's in the same directory
+
 from hashwolf import (
     generate_hash, display_result, direct_crack, compare_hashes, recursive_combinations, 
     indirect_crack, log_hash_type, write_to_file, generate_combinations, store_combination, 

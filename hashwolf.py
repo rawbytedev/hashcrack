@@ -11,6 +11,9 @@ attempt_count = 0
 # Logging configuration
 logging.basicConfig(filename='hashwolf.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+def genehash(hash_type, raw):
+    return hashlib.new(hash_type, raw.encode()).hexdigest()
+
 # Context manager to capture stdout
 @contextlib.contextmanager
 def capture_stdout(stdout=None):
