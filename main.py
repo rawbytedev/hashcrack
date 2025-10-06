@@ -13,7 +13,7 @@ def validate_input(arguments):
     if arguments.attack == "direct":
         print("Attempting direct attack mode...")
         try:
-            open(arguments.wordlist, "r")
+            open(arguments.wordlist, "r", encoding="utf-8")
         except FileNotFoundError:
             print("""Error: Unable to use the specified wordlist.
 Possible reasons:
@@ -27,7 +27,7 @@ Please check the wordlist file and try again. If the issue persists, report it o
 
     elif arguments.attack == "rainbow":
         try:
-            with open("logs/hash_logs.txt", "r") as log_file:
+            with open("logs/hash_logs.txt", "r", encoding="utf-8") as log_file:
                 if arguments.type in log_file.read():
                     print("## Rainbow dictionary verified successfully")
                 else:

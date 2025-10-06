@@ -1,7 +1,10 @@
-
+.gitignore
 __pycache__/hashwolf.cpython-312.pyc
 dict/sha1/0.txt
 hashwolf.log
 todo.txt
 results.txt
 logs/rainlogs.txt
+__pycache__/hashwolf.cpython-313.pyc
+logs/hash_logs.txt
+

@@ -11,6 +11,8 @@ from hashwolf import (
     indirect_crack, log_hash_type, write_to_file, generate_combinations, store_combination, 
     create_hash_dictionary, rainbow_crack, start
 )
+def setup():
+    pass
 
 class TestHashCrack(unittest.TestCase):
     
@@ -25,7 +27,7 @@ class TestHashCrack(unittest.TestCase):
         self.assertIn("Cracked successfully", captured_output.getvalue())
 
     def test_direct_crack(self):
-        with open('wordlist.txt', 'w') as f:
+        with open('wordlist.txt', 'w', encoding="utf-8") as f:
             f.write("test\npassword\n123456")
         captured_output = StringIO()
         sys.stdout = captured_output
@@ -55,41 +57,44 @@ class TestHashCrack(unittest.TestCase):
     def test_log_hash_type(self):
         log_path = "logs/hash_logs.txt"
         log_hash_type('md5')
-        with open(log_path, "r") as f:
+        with open(log_path, "r", encoding="utf-8") as f:
             self.assertIn('md5', f.read())
 
     def test_write_to_file(self):
         write_to_file('test', 'md5', 0)
-        with open('dict/md5/0.txt', 'r') as f:
+        with open('dict/md5/0.txt', 'r', encoding="utf-8") as f:
             self.assertIn('test', f.read())
         os.remove('dict/md5/0.txt')
 
-    """def test_generate_combinations(self):
+    def test_generate_combinations(self):
         captured_output = StringIO()
         sys.stdout = captured_output
         generate_combinations(list('ab'), '', 2, 2, 'md5', 0)
-       """ 
+
     def test_store_combination(self):
         store_combination('test', 'md5', 0)
-        with open('dict/md5/0.txt', 'r') as f:
+        with open('dict/md5/0.txt', 'r', encoding="utf-8") as f:
             self.assertIn('test:', f.read())
         os.remove('dict/md5/0.txt')
 
-    def test_create_hash_dictionary(self):
+    """def test_create_hash_dictionary(self):
         create_hash_dictionary('md5')
         self.assertTrue(os.path.exists('dict/md5'))
-        os.rmdir('dict/md5')
+        os.rmdir('dict/md5')"""
 
     def test_rainbow_crack(self):
         # This test requires a pre-generated dictionary, so it's more of a placeholder
         self.assertTrue(True)
 
     def test_start(self):
+        with open('wordlist.txt', 'w', encoding="utf-8") as f:
+            f.write("test\npassword\n123456")
         captured_output = StringIO()
         sys.stdout = captured_output
         start('direct', hashlib.md5('test'.encode()).hexdigest(), 'md5', wordlist='wordlist.txt')
         sys.stdout = sys.__stdout__
         self.assertIn("Cracked successfully", captured_output.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()

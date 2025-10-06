@@ -48,14 +48,18 @@ Original word: {cracked_word}"""
     print(message)
     logging.info(message)
     if output_file:
-        with open(output_file, "w") as f:
+        with open(output_file, "w", encoding="utf-8") as f:
             f.write(message)
         print(f"Results saved to file: {output_file}")
-    sys.exit(0)
+    return
+    #sys.exit(0)
 
 # Direct hash cracking using a wordlist
+"""
+"""
 def direct_crack(hash_type, wordlist, hash_to_crack, output_file=None):
-    words = open(wordlist, 'r').read().split("\n")
+    with open(wordlist, 'r',buffering=1 ,encoding="utf-8") as f:
+        words = f.read().split("\n")
     for attempt, word in enumerate(words):
         try:
             generated_hash = generate_hash(hash_type, word)
@@ -100,17 +104,17 @@ def log_hash_type(hash_type):
     log_path = "logs/hash_logs.txt"
     os.makedirs(os.path.dirname(log_path), exist_ok=True)
     try:
-        with open(log_path, "r") as f:
+        with open(log_path, "r",encoding="utf-8") as f:
             if hash_type not in f.read():
-                with open(log_path, "a") as fw:
+                with open(log_path, "a", encoding="utf-8") as fw:
                     fw.write(f"{hash_type}\n")
     except FileNotFoundError:
-        with open(log_path, "w") as fw:
+        with open(log_path, "w", encoding="utf-8") as fw:
             fw.write(f"{hash_type}\n")
 
 # Write the raw word and its hash to a file
 def write_to_file(raw, hash_type, file_idx):
-    with open(f"dict/{hash_type}/{file_idx}.txt", "a") as f:
+    with open(f"dict/{hash_type}/{file_idx}.txt", "a", encoding="utf-8") as f:
         f.write(raw + "\n")
 
 # Generate combinations and store them in the dictionary
@@ -140,7 +144,7 @@ def create_hash_dictionary(hash_type, charset="qwertyuiopasdfghjklzxcvbnm+×÷=%
 def rainbow_crack(hash_type, target_hash, output_file=None):
     log_path = "logs/hash_logs.txt"
     try:
-        with open(log_path, "r") as f:
+        with open(log_path, "r", encoding="utf-8") as f:
             if hash_type not in f.read():
                 print("Error: Generate a dictionary for this hash type first.")
                 return
@@ -151,7 +155,7 @@ def rainbow_crack(hash_type, target_hash, output_file=None):
     dict_path = f"dict/{hash_type}"
     for file_name in os.listdir(dict_path):
         if file_name.endswith(".txt"):
-            with open(os.path.join(dict_path, file_name), "r") as f:
+            with open(os.path.join(dict_path, file_name), "r", encoding="utf-8") as f:
                 for line in f:
                     raw, hashed = line.strip().split(":")
                     if hashed == target_hash:
