@@ -14,6 +14,7 @@ HashCrack is a versatile and powerful hash cracking tool designed for various at
 ## Installation
 
 1. **Clone the Repository**:
+
    ```sh
    git clone https://github.com/rawbytedev/hashcrack.git
    cd hashwolf
